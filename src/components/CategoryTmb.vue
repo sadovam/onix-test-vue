@@ -1,17 +1,22 @@
 <template>
   <div class="hello">
-    <h2>{{ title }}</h2>
+    <h2>{{ category.title }}</h2>
+    <img v-bind:src="require(`@/assets/images/categories/${category.tmb}`)"/>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
+import { ICategory } from '@/common/interfaces';
 
 export default Vue.extend({
   name: 'CategoryTmb',
   props: {
-    title: String,
+    category: {
+      type: Object as PropType<ICategory>,
+    },
   },
+
 });
 </script>
 
