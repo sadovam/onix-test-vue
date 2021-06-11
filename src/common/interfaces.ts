@@ -3,3 +3,10 @@ export interface ICategory {
   title: string,
   tmb: string,
 }
+
+export interface ISubCategory {
+  id: number,
+  title: string,
+  tmb: string,
+  categoryId: number,
+}

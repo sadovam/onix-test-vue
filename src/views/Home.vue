@@ -1,9 +1,9 @@
 <template>
-  <ul>
-  <li v-for="category in categories" :key="category.id">
+  <div>
+  <router-link v-for="category in categories" :key="category.id" :to="'/category/' + category.id">
     <CategoryTmb :category="category"/>
-  </li>
-  </ul>
+  </router-link>
+  </div>
 </template>
 
 <script lang="ts">
