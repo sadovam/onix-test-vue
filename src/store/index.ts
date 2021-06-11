@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 import { ICategory, IProduct, ISubCategory } from '@/common/interfaces';
 import {
   fetchCategories, fetchSubCategories,
-  fetchProductsByCategory, fetchProductsBySubCategory,
+  fetchProductsByCategory, fetchProductsBySubCategory, fetchProduct,
 } from '@/api';
 
 Vue.use(Vuex);
@@ -13,6 +13,7 @@ interface HomeStore {
   categories: ICategory[],
   subcategories: ISubCategory[],
   products: IProduct[],
+  product: IProduct | null,
 }
 
 export default new Vuex.Store<HomeStore>({
@@ -20,6 +21,7 @@ export default new Vuex.Store<HomeStore>({
     categories: [],
     subcategories: [],
     products: [],
+    product: null,
   },
   mutations: {
     UPDATE_CATEGORIES(state, categories: ICategory[]) {
@@ -30,6 +32,9 @@ export default new Vuex.Store<HomeStore>({
     },
     UPDATE_PRODUCTS(state, products: IProduct[]) {
       state.products = products;
+    },
+    UPDATE_PRODUCT(state, product: IProduct) {
+      state.product = product;
     },
   },
   actions: {
@@ -49,6 +54,10 @@ export default new Vuex.Store<HomeStore>({
       const products = await fetchProductsBySubCategory(subcategoryId);
       commit('UPDATE_PRODUCTS', products);
     },
+    async getProduct({ commit }, { productId }) {
+      const product = await fetchProduct(productId);
+      commit('UPDATE_PRODUCT', product);
+    },
   },
   modules: {
   },
@@ -56,5 +65,6 @@ export default new Vuex.Store<HomeStore>({
     categories: (state): ICategory[] => state.categories,
     subcategories: (state): ISubCategory[] => state.subcategories,
     products: (state): IProduct[] => state.products,
+    product: (state): IProduct | null => state.product,
   },
 });

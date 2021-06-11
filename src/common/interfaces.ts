@@ -18,3 +18,7 @@ export interface IProduct {
   categoryId: number,
   subcategoryId: number,
 }
+
+export interface IProducts {
+  [index: number]: IProduct,
+}

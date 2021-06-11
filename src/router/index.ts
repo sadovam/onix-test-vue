@@ -20,6 +20,11 @@ const routes: Array<RouteConfig> = [
     name: 'Products',
     component: () => import('@/views/Products.vue'),
   },
+  {
+    path: '/product/:product_id',
+    name: 'Product',
+    component: () => import('@/views/Product.vue'),
+  },
 ];
 
 const router = new VueRouter({

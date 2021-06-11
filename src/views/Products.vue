@@ -10,9 +10,9 @@
     </div>
     <div>
     <h3>Products</h3>
-    <div v-for="product in products" :key="product.id">
+    <router-link v-for="product in products" :key="product.id" :to="'/product/' + product.id">
       <h2>{{ product.title }}</h2>
-    </div>
+    </router-link>
     </div>
   </div>
 </template>

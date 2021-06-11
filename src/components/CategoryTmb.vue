@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h2>{{ category.title }}</h2>
-    <img v-bind:src="require(`@/${path}`)"/>
+    <img v-bind:src="require(`@/${imagePath}`)"/>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      path: config.categoriesImgPath + this.category.tmb,
+      imagePath: config.categoriesImgPath + this.category.tmb,
     };
   },
 });
