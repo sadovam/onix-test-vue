@@ -1,6 +1,6 @@
-import { ICategory, ISubCategory } from '@/common/interfaces';
+import { ICategory, IProduct, ISubCategory } from '@/common/interfaces';
 
-import { categories, subcategories } from '@/api/fakeData';
+import { categories, subcategories, products } from '@/api/fakeData';
 
 export const fetchCategories = async (): Promise<ICategory[]> => {
   const promise = new Promise<ICategory[]>((resolve) => {
@@ -13,6 +13,22 @@ export const fetchCategories = async (): Promise<ICategory[]> => {
 export const fetchSubCategories = async (categoryId: number): Promise<ISubCategory[]> => {
   const promise = new Promise<ISubCategory[]>((resolve) => {
     setTimeout(() => resolve(subcategories.filter((sc) => sc.categoryId === categoryId)), 2000);
+  });
+
+  return promise;
+};
+
+export const fetchProductsByCategory = async (categoryId: number): Promise<IProduct[]> => {
+  const promise = new Promise<IProduct[]>((resolve) => {
+    setTimeout(() => resolve(products.filter((pr) => pr.categoryId === categoryId)), 2000);
+  });
+
+  return promise;
+};
+
+export const fetchProductsBySubCategory = async (subcategoryId: number): Promise<IProduct[]> => {
+  const promise = new Promise<IProduct[]>((resolve) => {
+    setTimeout(() => resolve(products.filter((pr) => pr.subcategoryId === subcategoryId)), 2000);
   });
 
   return promise;

@@ -1,20 +1,25 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { ICategory, ISubCategory } from '@/common/interfaces';
-import { fetchCategories, fetchSubCategories } from '@/api';
+import { ICategory, IProduct, ISubCategory } from '@/common/interfaces';
+import {
+  fetchCategories, fetchSubCategories,
+  fetchProductsByCategory, fetchProductsBySubCategory,
+} from '@/api';
 
 Vue.use(Vuex);
 
 interface HomeStore {
   categories: ICategory[],
   subcategories: ISubCategory[],
+  products: IProduct[],
 }
 
 export default new Vuex.Store<HomeStore>({
   state: {
     categories: [],
     subcategories: [],
+    products: [],
   },
   mutations: {
     UPDATE_CATEGORIES(state, categories: ICategory[]) {
@@ -22,6 +27,9 @@ export default new Vuex.Store<HomeStore>({
     },
     UPDATE_SUBCATEGORIES(state, subcategories: ISubCategory[]) {
       state.subcategories = subcategories;
+    },
+    UPDATE_PRODUCTS(state, products: IProduct[]) {
+      state.products = products;
     },
   },
   actions: {
@@ -33,11 +41,20 @@ export default new Vuex.Store<HomeStore>({
       const subcategories = await fetchSubCategories(categoryId);
       commit('UPDATE_SUBCATEGORIES', subcategories);
     },
+    async getProductsByCategory({ commit }, { categoryId }) {
+      const products = await fetchProductsByCategory(categoryId);
+      commit('UPDATE_PRODUCTS', products);
+    },
+    async getProductsBySubCategory({ commit }, { subcategoryId }) {
+      const products = await fetchProductsBySubCategory(subcategoryId);
+      commit('UPDATE_PRODUCTS', products);
+    },
   },
   modules: {
   },
   getters: {
     categories: (state): ICategory[] => state.categories,
     subcategories: (state): ISubCategory[] => state.subcategories,
+    products: (state): IProduct[] => state.products,
   },
 });

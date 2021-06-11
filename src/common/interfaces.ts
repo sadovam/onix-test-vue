@@ -10,3 +10,11 @@ export interface ISubCategory {
   tmb: string,
   categoryId: number,
 }
+
+export interface IProduct {
+  id: number,
+  title: string,
+  tmb: string,
+  categoryId: number,
+  subcategoryId: number,
+}
