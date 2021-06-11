@@ -1,13 +1,14 @@
 <template>
   <div class="hello">
     <h2>{{ category.title }}</h2>
-    <img v-bind:src="require(`@/assets/images/categories/${category.tmb}`)"/>
+    <img v-bind:src="require(`@/${path}`)"/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 import { ICategory } from '@/common/interfaces';
+import config from '@/common/config';
 
 export default Vue.extend({
   name: 'CategoryTmb',
@@ -16,7 +17,11 @@ export default Vue.extend({
       type: Object as PropType<ICategory>,
     },
   },
-
+  data() {
+    return {
+      path: config.categoriesImgPath + this.category.tmb,
+    };
+  },
 });
 </script>
 
