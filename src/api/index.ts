@@ -1,6 +1,9 @@
-import { ICategory, IProduct, ISubCategory } from '@/common/interfaces';
-
-import { categories, subcategories, products } from '@/api/fakeData';
+import {
+  ICategory, IProduct, IProductTmb, ISubCategory,
+} from '@/common/interfaces';
+import categories from './fakeData/categories';
+import products from './fakeData/products';
+import subcategories from './fakeData/subcategories';
 
 export const fetchCategories = async (): Promise<ICategory[]> => {
   const promise = new Promise<ICategory[]>((resolve) => {
@@ -10,19 +13,31 @@ export const fetchCategories = async (): Promise<ICategory[]> => {
   return promise;
 };
 
-export const fetchSubCategories = async (categoryId: number): Promise<ISubCategory[]> => {
-  const promise = new Promise<ISubCategory[]>((resolve) => {
-    setTimeout(() => resolve(subcategories.filter((sc) => sc.categoryId === categoryId)), 2000);
+export const fetchSubCategories = async (categoryId: number): Promise<ICategory[]> => {
+  const promise = new Promise<ICategory[]>((resolve) => {
+    setTimeout(() => resolve(
+      subcategories.reduce((acc: ICategory[], sc: ISubCategory): ICategory[] => {
+        if (sc.categoryId === categoryId) {
+          acc.push({ id: sc.id, title: sc.title, image: sc.image });
+        }
+        return acc;
+      }, []),
+    ), 2000);
   });
 
   return promise;
 };
 
-export const fetchProductsByCategory = async (categoryId: number): Promise<IProduct[]> => {
-  const promise = new Promise<IProduct[]>((resolve) => {
+export const fetchProductsByCategory = async (categoryId: number): Promise<IProductTmb[]> => {
+  const promise = new Promise<IProductTmb[]>((resolve) => {
     setTimeout(
       () => resolve(
-        Object.values(products).filter((pr) => pr.categoryId === categoryId),
+        Object.values(products).reduce((acc: IProductTmb[], pr: IProduct) => {
+          if (pr.categoryId === categoryId) {
+            acc.push({ id: pr.id, title: pr.title, image: pr.image });
+          }
+          return acc;
+        }, []),
       ), 2000,
     );
   });
@@ -30,11 +45,16 @@ export const fetchProductsByCategory = async (categoryId: number): Promise<IProd
   return promise;
 };
 
-export const fetchProductsBySubCategory = async (subcategoryId: number): Promise<IProduct[]> => {
-  const promise = new Promise<IProduct[]>((resolve) => {
+export const fetchProductsBySubCategory = async (categoryId: number): Promise<IProductTmb[]> => {
+  const promise = new Promise<IProductTmb[]>((resolve) => {
     setTimeout(
       () => resolve(
-        Object.values(products).filter((pr) => pr.subcategoryId === subcategoryId),
+        Object.values(products).reduce((acc: IProductTmb[], pr: IProduct) => {
+          if (pr.subcategoryId === categoryId) {
+            acc.push({ id: pr.id, title: pr.title, image: pr.image });
+          }
+          return acc;
+        }, []),
       ), 2000,
     );
   });

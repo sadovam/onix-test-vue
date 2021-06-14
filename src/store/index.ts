@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { ICategory, IProduct, ISubCategory } from '@/common/interfaces';
+import { ICategory, IProduct, IProductTmb } from '@/common/interfaces';
 import {
   fetchCategories, fetchSubCategories,
   fetchProductsByCategory, fetchProductsBySubCategory, fetchProduct,
@@ -11,8 +11,8 @@ Vue.use(Vuex);
 
 interface HomeStore {
   categories: ICategory[],
-  subcategories: ISubCategory[],
-  products: IProduct[],
+  subcategories: ICategory[],
+  products: IProductTmb[],
   product: IProduct | null,
 }
 
@@ -27,10 +27,10 @@ export default new Vuex.Store<HomeStore>({
     UPDATE_CATEGORIES(state, categories: ICategory[]) {
       state.categories = categories;
     },
-    UPDATE_SUBCATEGORIES(state, subcategories: ISubCategory[]) {
+    UPDATE_SUBCATEGORIES(state, subcategories: ICategory[]) {
       state.subcategories = subcategories;
     },
-    UPDATE_PRODUCTS(state, products: IProduct[]) {
+    UPDATE_PRODUCTS(state, products: IProductTmb[]) {
       state.products = products;
     },
     UPDATE_PRODUCT(state, product: IProduct) {
@@ -63,8 +63,8 @@ export default new Vuex.Store<HomeStore>({
   },
   getters: {
     categories: (state): ICategory[] => state.categories,
-    subcategories: (state): ISubCategory[] => state.subcategories,
-    products: (state): IProduct[] => state.products,
+    subcategories: (state): ICategory[] => state.subcategories,
+    products: (state): IProductTmb[] => state.products,
     product: (state): IProduct | null => state.product,
   },
 });

@@ -19,7 +19,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      imagePath: config.categoriesImgPath + this.category.tmb,
+      imagePath: config.categoriesImgPath + this.category.image,
     };
   },
 });
