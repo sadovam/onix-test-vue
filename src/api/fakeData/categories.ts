@@ -3,39 +3,38 @@ import { ICategory } from '@/common/interfaces';
 const categories: ICategory[] = [
   {
     id: 0,
-    title: 'Unit',
+    title: 'Consumer',
     image: 'img0.jpg',
   },
   {
     id: 1,
-    title: 'Manage tree',
+    title: 'Measure throw',
     image: 'img1.jpg',
   },
   {
     id: 2,
-    title: 'Relate',
+    title: 'Knowledge',
     image: 'img2.jpg',
   },
   {
     id: 3,
-    title: 'Society themselves',
+    title: 'Purpose',
     image: 'img3.jpg',
   },
   {
     id: 4,
-    title: 'Former',
+    title: 'Will matter',
     image: 'img4.jpg',
   },
   {
     id: 5,
-    title: 'Same',
+    title: 'Attention police',
     image: 'img5.jpg',
   },
   {
     id: 6,
-    title: 'Fly',
+    title: 'Billion',
     image: 'img6.jpg',
   },
 ];
-
 export default categories;

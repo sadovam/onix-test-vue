@@ -22,7 +22,7 @@ export const fetchSubCategories = async (categoryId: number): Promise<ICategory[
         }
         return acc;
       }, []),
-    ), 2000);
+    ), 1000);
   });
 
   return promise;
@@ -34,11 +34,13 @@ export const fetchProductsByCategory = async (categoryId: number): Promise<IProd
       () => resolve(
         Object.values(products).reduce((acc: IProductTmb[], pr: IProduct) => {
           if (pr.categoryId === categoryId) {
-            acc.push({ id: pr.id, title: pr.title, image: pr.image });
+            acc.push({
+              id: pr.id, title: pr.title, image: pr.image, price: pr.price,
+            });
           }
           return acc;
         }, []),
-      ), 2000,
+      ), 1000,
     );
   });
 
@@ -51,11 +53,13 @@ export const fetchProductsBySubCategory = async (categoryId: number): Promise<IP
       () => resolve(
         Object.values(products).reduce((acc: IProductTmb[], pr: IProduct) => {
           if (pr.subcategoryId === categoryId) {
-            acc.push({ id: pr.id, title: pr.title, image: pr.image });
+            acc.push({
+              id: pr.id, title: pr.title, image: pr.image, price: pr.price,
+            });
           }
           return acc;
         }, []),
-      ), 2000,
+      ), 1000,
     );
   });
 
@@ -64,7 +68,23 @@ export const fetchProductsBySubCategory = async (categoryId: number): Promise<IP
 
 export const fetchProduct = async (productId: number): Promise<IProduct> => {
   const promise = new Promise<IProduct>((resolve) => {
-    setTimeout(() => resolve(products[productId]), 2000);
+    setTimeout(() => resolve(products[productId]), 1000);
+  });
+
+  return promise;
+};
+
+export const fetchCategory = async (categoryId: number): Promise<ICategory> => {
+  const promise = new Promise<ICategory>((resolve) => {
+    setTimeout(() => resolve(categories[categoryId]), 1000);
+  });
+
+  return promise;
+};
+
+export const fetchSubCategory = async (subcategoryId: number): Promise<ICategory> => {
+  const promise = new Promise<ICategory>((resolve) => {
+    setTimeout(() => resolve(subcategories[subcategoryId]), 1000);
   });
 
   return promise;

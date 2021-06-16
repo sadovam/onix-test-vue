@@ -18,14 +18,27 @@ export interface IProduct {
   categoryId: number,
   subcategoryId: number,
   description: string,
+  price: number,
 }
 
 export interface IProductTmb {
   id: number,
   title: string,
   image: string,
+  price: number,
 }
 
 export interface IProducts {
   [index: number]: IProduct,
+}
+
+export interface ICartPosition {
+  product: IProduct,
+  num: number,
+}
+
+export interface IBreadCrumbs {
+  category: ICategory | null,
+  subcategory: ICategory | null,
+  product: IProduct | null,
 }

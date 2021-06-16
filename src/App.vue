@@ -2,21 +2,32 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/cart">Cart[{{productsNumInCart}}]</router-link>
     </div>
+    <BreadCrumbs/>
     <router-view/>
   </div>
 </template>
 
+<script>
+import Vue from 'vue';
+import BreadCrumbs from '@/components/BreadCrumbs.vue';
+
+export default Vue.extend({
+  name: 'App',
+  components: {
+    BreadCrumbs,
+  },
+  computed: {
+    productsNumInCart() {
+      return this.$store.getters.cart.length;
+    },
+  },
+});
+</script>
+
 <style lang="scss">
-
-$shadow: #030706;
-$shadow2: #b3c7c6;
-$bg1: #233739;
-$bg2: #304446;
-$fg1: #0dbc79;
-$fg2: #1d8c59;
-
+@import '@/assets/scss/_main';
 *,
 *::before,
 *::after {
