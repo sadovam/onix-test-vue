@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import {
-  ICartPosition, ICategory, IProduct, IProductTmb,
+  ICartPosition, ICategory, IOrder, IProduct, IProductTmb,
 } from '@/common/interfaces';
 import {
   fetchCategories, fetchSubCategories,
@@ -20,7 +20,19 @@ interface HomeStore {
   products: IProductTmb[],
   product: IProduct | null,
   cart: ICartPosition[],
+  order: IOrder,
 }
+
+const orderInit :IOrder = {
+  name: '',
+  address: '',
+  zip: '',
+  phone: '',
+  delivery: '',
+  cardNumber: '',
+  expDay: '',
+  sequrityCode: '',
+};
 
 export default new Vuex.Store<HomeStore>({
   state: {
@@ -31,6 +43,7 @@ export default new Vuex.Store<HomeStore>({
     category: null,
     subcategory: null,
     cart: [],
+    order: orderInit,
   },
   mutations: {
     UPDATE_CATEGORIES(state, categories: ICategory[]) {
@@ -53,6 +66,24 @@ export default new Vuex.Store<HomeStore>({
     },
     UPDATE_CART(state, item: ICartPosition) {
       state.cart.push(item);
+    },
+    CLEAR_CART(state) {
+      state.cart = [];
+    },
+    UPDATE_ORDER(state, order: IOrder) {
+      state.order = order;
+    },
+    CLEAR_ORDER(state) {
+      state.order = {
+        name: '',
+        address: '',
+        zip: '',
+        phone: '',
+        delivery: '',
+        cardNumber: '',
+        expDay: '',
+        sequrityCode: '',
+      };
     },
   },
   actions: {
@@ -95,5 +126,6 @@ export default new Vuex.Store<HomeStore>({
     products: (state): IProductTmb[] => state.products,
     product: (state): IProduct | null => state.product,
     cart: (state): ICartPosition[] => state.cart,
+    order: (state): IOrder => state.order,
   },
 });

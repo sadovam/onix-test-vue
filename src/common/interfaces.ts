@@ -42,3 +42,14 @@ export interface IBreadCrumbs {
   subcategory: ICategory | null,
   product: IProduct | null,
 }
+
+export interface IOrder {
+  name: string,
+  address: string,
+  zip: string,
+  phone: string,
+  delivery: string,
+  cardNumber: string,
+  expDay: string,
+  sequrityCode: string,
+}

@@ -1,9 +1,9 @@
 <template>
-  <div class="breadcrumbs">
-    <router-link v-if="category" to="/">Categories</router-link>
+  <div v-if="shown" >
+    <router-link v-if="category" to="/">Home</router-link>
     <router-link
     v-if="subcategory" :to="'/category/' + category.id">{{category.title}}</router-link>
-    <router-link v-if="product"
+    <router-link v-if="product && category && subcategory"
     :to="'/category/' + category.id + '?sub=' + subcategory.id">{{subcategory.title}}</router-link>
     <h1>{{lastPosition}}</h1>
   </div>
@@ -17,11 +17,14 @@ export default Vue.extend({
   name: 'BreadCrumbs',
   data(): {category: ICategory | null,
           product: IProduct | null,
-          subcategory: ICategory | null} {
+          subcategory: ICategory | null,
+          shown: boolean,
+          } {
     return {
       category: null,
       product: null,
       subcategory: null,
+      shown: true,
     };
   },
   watch: {
@@ -40,6 +43,11 @@ export default Vue.extend({
         await this.getProduct(+to.params?.product_id);
       } else {
         this.product = null;
+      }
+      if (to.path === '/cart' || to.path === '/confirm') {
+        this.shown = false;
+      } else {
+        this.shown = true;
       }
     },
   },
@@ -88,7 +96,7 @@ export default Vue.extend({
       if (this.category) {
         return this.category.title;
       }
-      return 'Categories';
+      return 'Home';
     },
   },
 });

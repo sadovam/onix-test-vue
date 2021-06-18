@@ -1,15 +1,16 @@
 <template>
   <div>
-    <h1>Category: {{ category ? category.title : null }}</h1>
     <Spinner v-if="showSpinner"/>
-    <main v-else>
-    <aside>
+    <div v-else>
+    <button @click="() => {showSubcategories = !showSubcategories}">Subcategories</button>
+    <main>
+    <aside v-if="showSubcategories">
       <router-link class="subcategory"
         v-for="subcategory in subcategories"
         :key="subcategory.id"
         :to="'/category/' + id + '?sub=' + subcategory.id"
       >
-        <img :src="require(`@/${imagePath}${subcategory.image}`)"/>
+        <img :src="subcategory.image ? require(`@/${imagePath}${subcategory.image}`) : ''"/>
         {{ subcategory.title }}
       </router-link>
     </aside>
@@ -19,6 +20,7 @@
       </router-link>
     </section>
     </main>
+    </div>
   </div>
 </template>
 
@@ -40,6 +42,7 @@ export default Vue.extend({
       id: +this.$route.params.category_id,
       imagePath: config.subcategoriesImgPath,
       showSpinner: false,
+      showSubcategories: true,
     };
   },
   async mounted() {

@@ -25,6 +25,11 @@ const routes: Array<RouteConfig> = [
     name: 'Product',
     component: () => import('@/views/Product.vue'),
   },
+  {
+    path: '/confirm',
+    name: 'Confirmation',
+    component: () => import('@/views/Confirmation.vue'),
+  },
 ];
 
 const router = new VueRouter({
