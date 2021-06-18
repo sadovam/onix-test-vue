@@ -60,4 +60,16 @@ body {
     }
   }
 }
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: $bg2;
+  color: $fg1;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px $shadow;
+  font-size: 1em;
+}
 </style>

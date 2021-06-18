@@ -1,8 +1,10 @@
 <template>
   <div>
     <Spinner v-if="showSpinner"/>
-    <div v-else>
-    <button @click="() => {showSubcategories = !showSubcategories}">Subcategories</button>
+    <div v-else class="container">
+    <button class="toggle"
+      @click="() => {showSubcategories = !showSubcategories}">Subcategories
+    </button>
     <main>
     <aside v-if="showSubcategories">
       <router-link class="subcategory"
@@ -116,6 +118,10 @@ export default Vue.extend({
 main {
   display: flex;
   justify-content: start;
+  align-items: flex-start;
+}
+
+.container {
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -124,6 +130,7 @@ aside {
   min-width: fit-content;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 img {
@@ -177,6 +184,20 @@ a:focus, a:hover {
   font-weight: bold;
   font-size: 1.5em;
   border-radius: 5px;
+}
+.toggle {
+  display: inherit;
+}
+
+@media only screen and (max-width: 480px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  aside {
+    width: 90%;
+  }
 }
 
 </style>

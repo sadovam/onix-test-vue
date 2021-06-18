@@ -12,19 +12,19 @@
     <form @submit.prevent="onFormSubmit">
       <section>
       <h2>Address</h2>
-        <label for="name">Name</label>
+        <label for="name">Name*</label>
         <input v-model="order.name" name="name" autocomplete="name"
           maxlength="100" pattern="[\p{L} \-\.]+" required>
-        <label for="address">Address</label>
+        <label for="address">Address*</label>
         <textarea v-model="order.address" name="address" autocomplete="address"
           maxlength="300" required></textarea>
         <label for="postal-code">ZIP or postal code (optional)</label>
         <input v-model="order.zip" name="postal-code"
           autocomplete="postal-code" maxlength="20">
-        <label for="tel">Telephone</label>
+        <label for="tel">Telephone*</label>
         <input v-model="order.phone" name="tel" autocomplete="tel" type="tel"
           maxlength="30" pattern="[\d \-\+]+" enterkeyhint="done" required>
-        <label for="delivery">Delivery</label>
+        <label for="delivery">Delivery*</label>
         <select v-model="order.delivery" name="delivery" required>
           <option value="AirPost">AirPost</option>
           <option value="Post">Post</option>
@@ -35,22 +35,18 @@
       <section>
         <h2>Payment form</h2>
 
-        <label for="cc-number">Card number</label>
+        <label for="cc-number">Card number*</label>
         <input v-model="order.cardNumber" name="cc-number" autocomplete="cc-number"
         inputmode="numeric" pattern="[\d ]{10,30}" required>
 
-        <div>
-          <label for="cc-exp">Expiry date</label>
-          <input v-model="order.expDay" name="cc-exp" autocomplete="cc-exp"
+        <label for="cc-exp">Expiry date*</label>
+        <input v-model="order.expDay" name="cc-exp" autocomplete="cc-exp"
           placeholder="MM/YY" maxlength="5" required>
-        </div>
-        <div>
-          <label for="cc-csc">Security code</label>
-          <input v-model="order.sequrityCode" name="cc-csc" autocomplete="cc-csc"
+          <label for="cc-csc">Security code*</label>
+        <input v-model="order.sequrityCode" name="cc-csc" autocomplete="cc-csc"
           inputmode="numeric" maxlength="3" required>
           <p>Back of card, last 3 digits</p>
-        </div>
-      <button id="save-address">Save address</button>
+      <button id="save-address">Submit</button>
       </section>
     </form>
   </div>
@@ -108,6 +104,7 @@ h2 {
 
 ul {
   list-style: none;
+  padding: 0;
 }
 
 section {
@@ -116,9 +113,14 @@ section {
   align-items: flex-end;
 }
 
-input {
+input, select, textarea {
+  min-width: 250px;
   padding: 5px 10px;
   margin: 5px 10px;
+}
+
+textarea {
+  height: 100px;
 }
 
 </style>

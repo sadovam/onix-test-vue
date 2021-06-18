@@ -8,7 +8,11 @@
           <h1>{{product.title}}</h1>
           <h2>${{product.price}}</h2>
           <p>{{product.description}}</p>
-          <input v-model.number="productNum" type="number">
+          <div class="numSelector">
+            <button @click="() => ++productNum">+</button>
+            <input v-model.number="productNum" inputmode="numeric" pattern="[\d ]+">
+            <button @click="() => productNum > 1 ? --productNum : productnum">-</button>
+          </div>
           <button @click="onAddToCart">Add to Cart</button>
           <button @click="onBuyNow">Buy Now</button>
         </div>
@@ -107,6 +111,14 @@ h3 {
 
 p {
   max-width: 300px;
+}
+
+.numSelector {
+  display: flex;
+  align-items: center;
+  input {
+    width: 50px;
+  }
 }
 
 </style>
